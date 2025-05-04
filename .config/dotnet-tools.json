@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "csharpier": {
+      "version": "1.0.1",
+      "commands": [
+        "csharpier"
+      ],
+      "rollForward": false
+    },
+    "husky": {
+      "version": "0.7.2",
+      "commands": [
+        "husky"
+      ],
+      "rollForward": false
+    },
+    "gitversion.tool": {
+      "version": "6.3.0",
+      "commands": [
+        "dotnet-gitversion"
+      ],
+      "rollForward": false
+    },
+    "dotnet-coverage": {
+      "version": "17.14.2",
+      "commands": [
+        "dotnet-coverage"
+      ],
+      "rollForward": false
+    },
+    "dotnet-reportgenerator-globaltool": {
+      "version": "5.4.6",
+      "commands": [
+        "reportgenerator"
+      ],
+      "rollForward": false
+    },
+    "easybuild.commitlinter": {
+      "version": "2.0.0",
+      "commands": [
+        "commit-linter"
+      ],
+      "rollForward": false
+    }
+  }
+}
