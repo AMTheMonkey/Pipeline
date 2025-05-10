@@ -9,6 +9,22 @@ public class IServiceCollectionExtensionsTest
     [TestCase(ServiceLifetime.Transient)]
     [TestCase(ServiceLifetime.Scoped)]
     [TestCase(ServiceLifetime.Singleton)]
+    public void AddMediator_Should_InjectMediator(ServiceLifetime lifetime)
+    {
+        //Arrange
+        ServiceCollection sc = new();
+
+        //Act
+        sc.AddMediator(lifetime);
+
+        //Assert
+        using var serviceProvider = sc.BuildServiceProvider();
+        Assert.DoesNotThrow(() => serviceProvider.GetRequiredService<IMediator>());
+    }
+
+    [TestCase(ServiceLifetime.Transient)]
+    [TestCase(ServiceLifetime.Scoped)]
+    [TestCase(ServiceLifetime.Singleton)]
     public async Task AddPipeline_Should_Add_Pipeline_And_Be_Functionnal(ServiceLifetime lifetime)
     {
         //Arrange
@@ -89,6 +105,16 @@ public class IServiceCollectionExtensionsTest
         Assert.Throws<ArgumentOutOfRangeException>(() =>
             sc.AddPipeline(pipeline, (ServiceLifetime)5)
         );
+    }
+
+    [Test]
+    public void AddMediator_With_BadLifetime_should_throw_ArgumentOutOfRange()
+    {
+        //Arrange
+        ServiceCollection sc = new();
+
+        //Act
+        Assert.Throws<ArgumentOutOfRangeException>(() => sc.AddMediator((ServiceLifetime)5));
     }
 
     [TestCase(ServiceLifetime.Transient)]

@@ -1,11 +1,24 @@
 using System;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Pipeline.Extensions
 {
     public static class IServiceCollectionExtensions
     {
+        public static IServiceCollection AddMediator(
+            this IServiceCollection serviceCollection,
+            ServiceLifetime serviceLifetime = ServiceLifetime.Transient
+        )
+        {
+            return serviceLifetime switch
+            {
+                ServiceLifetime.Transient => serviceCollection.AddTransient<IMediator, Mediator>(),
+                ServiceLifetime.Scoped => serviceCollection.AddScoped<IMediator, Mediator>(),
+                ServiceLifetime.Singleton => serviceCollection.AddSingleton<IMediator, Mediator>(),
+                _ => throw new ArgumentOutOfRangeException(nameof(serviceLifetime)),
+            };
+        }
+
         public static IServiceCollection AddPipeline<TInput>(
             this IServiceCollection serviceCollection,
             IPipeline<TInput> pipeline,
@@ -21,17 +34,13 @@ namespace Pipeline.Extensions
             ServiceLifetime serviceLifetime = ServiceLifetime.Transient
         )
         {
-            switch (serviceLifetime)
+            return serviceLifetime switch
             {
-                case ServiceLifetime.Transient:
-                    return serviceCollection.AddTransient(factory);
-                case ServiceLifetime.Scoped:
-                    return serviceCollection.AddScoped(factory);
-                case ServiceLifetime.Singleton:
-                    return serviceCollection.AddSingleton(factory);
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(serviceLifetime));
-            }
+                ServiceLifetime.Transient => serviceCollection.AddTransient(factory),
+                ServiceLifetime.Scoped => serviceCollection.AddScoped(factory),
+                ServiceLifetime.Singleton => serviceCollection.AddSingleton(factory),
+                _ => throw new ArgumentOutOfRangeException(nameof(serviceLifetime)),
+            };
         }
 
         public static IServiceCollection AddPipeline<TInput, TOutput>(
@@ -49,17 +58,13 @@ namespace Pipeline.Extensions
             ServiceLifetime serviceLifetime = ServiceLifetime.Transient
         )
         {
-            switch (serviceLifetime)
+            return serviceLifetime switch
             {
-                case ServiceLifetime.Transient:
-                    return serviceCollection.AddTransient(factory);
-                case ServiceLifetime.Scoped:
-                    return serviceCollection.AddScoped(factory);
-                case ServiceLifetime.Singleton:
-                    return serviceCollection.AddSingleton(factory);
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(serviceLifetime));
-            }
+                ServiceLifetime.Transient => serviceCollection.AddTransient(factory),
+                ServiceLifetime.Scoped => serviceCollection.AddScoped(factory),
+                ServiceLifetime.Singleton => serviceCollection.AddSingleton(factory),
+                _ => throw new ArgumentOutOfRangeException(nameof(serviceLifetime)),
+            };
         }
     }
 }
