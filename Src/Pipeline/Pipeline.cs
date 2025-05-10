@@ -26,9 +26,9 @@ namespace Pipeline
             _func = func;
         }
 
-        public async Task Execute(TInput input, CancellationToken cancellationToken)
+        public Task Execute(TInput input, CancellationToken cancellationToken)
         {
-            await _func(input, cancellationToken);
+            return _func(input, cancellationToken);
         }
     }
 
@@ -59,9 +59,9 @@ namespace Pipeline
             );
         }
 
-        public async Task<TOutput> Execute(TInput input, CancellationToken cancellationToken)
+        public Task<TOutput> Execute(TInput input, CancellationToken cancellationToken)
         {
-            return await _func(input, cancellationToken);
+            return _func(input, cancellationToken);
         }
     }
 }
