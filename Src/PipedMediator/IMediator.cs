@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Pipeline
+namespace PipedMediator
 {
     public interface IMediator
     {

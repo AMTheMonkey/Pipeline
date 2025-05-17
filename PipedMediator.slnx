@@ -1,0 +1,17 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Example/">
+    <Project Path="Example/SimpleApi/SimpleApi.csproj" />
+    <Project Path="Example/SimpleConsole/SimpleConsole.csproj" />
+  </Folder>
+  <Folder Name="/Src/">
+    <Project Path="Src/PipedMediator/PipedMediator.csproj" />
+  </Folder>
+  <Folder Name="/Tst/">
+    <Project Path="Tst/PipedMediatorTest/PipedMediatorTest.csproj" />
+  </Folder>
+</Solution>

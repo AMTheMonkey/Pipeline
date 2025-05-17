@@ -18,6 +18,6 @@
     <Using Include="NUnit.Framework" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Src\Pipeline\Pipeline.csproj" />
+    <ProjectReference Include="..\..\Src\PipedMediator\PipedMediator.csproj" />
   </ItemGroup>
 </Project>
