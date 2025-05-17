@@ -1,5 +1,5 @@
-SLN=./Pipeline.sln
-APP=Src/Pipeline/Pipeline.csproj
+SLN=./PipedMediator.slnx
+APP=Src/PipedMediator/PipedMediator.csproj
 
 
 ALL: PRETTIER_FORMAT RESTORE BUILD TEST

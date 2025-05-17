@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Pipeline
+namespace PipedMediator
 {
     public class Mediator : IMediator
     {
