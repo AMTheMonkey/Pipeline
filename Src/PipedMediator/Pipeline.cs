@@ -1,6 +1,8 @@
-﻿using PipedMediator;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace SimpleConsole
+namespace PipedMediator
 {
     /// <summary>
     /// Static class that helps to create different kind of simple pipeline easily
@@ -39,6 +41,11 @@ namespace SimpleConsole
     {
         private readonly Func<TInput, CancellationToken, Task> _func;
 
+        public Pipeline(IPipeline<TInput> pipeline)
+        {
+            this._func = pipeline.Execute;
+        }
+
         public Pipeline(Func<TInput, CancellationToken, Task> func)
         {
             _func = func;
@@ -64,7 +71,24 @@ namespace SimpleConsole
             _func = func;
         }
 
-        public Pipeline<TInput, TNextOutput> Pipe<TNextOutput>(
+        public Pipeline(IPipeline<TInput, TOutput> pipeline)
+        {
+            this._func = pipeline.Execute;
+        }
+
+        public Pipeline<TInput> Pipe<TPipeline>(TPipeline pipeline)
+            where TPipeline : IPipeline<TOutput>
+        {
+            return this.Pipe(pipeline.Execute);
+        }
+
+        public Pipeline<TInput, TNextOutput> Pipe<TPipeline, TNextOutput>(TPipeline pipeline)
+            where TPipeline : IPipeline<TOutput, TNextOutput>
+        {
+            return this.Pipe(pipeline.Execute);
+        }
+
+        private Pipeline<TInput, TNextOutput> Pipe<TNextOutput>(
             Func<TOutput, CancellationToken, Task<TNextOutput>> func
         )
         {
@@ -74,7 +98,7 @@ namespace SimpleConsole
             );
         }
 
-        public Pipeline<TInput> Pipe(Func<TOutput, CancellationToken, Task> func)
+        private Pipeline<TInput> Pipe(Func<TOutput, CancellationToken, Task> func)
         {
             return new Pipeline<TInput>(
                 async (TInput input, CancellationToken cancellationToken) =>
